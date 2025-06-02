@@ -63,8 +63,10 @@
         ]);
         alert("訊息已傳送！");
       } catch (error) {
-        alert("訊息傳送失敗：" + error.message);
-      }
+  alert("錯誤: " + error.message);
+  document.getElementById("status").textContent = "錯誤：" + error.message;
+}
+
     }
 
     document.getElementById("btnGetProfile").addEventListener("click", getProfile);
