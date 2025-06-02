@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LIFF 測試頁</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+  <h1>LIFF 測試頁</h1>
+  <p id="status">初始化中...</p>
+  <button id="btnGetProfile" disabled>取得使用者資料</button>
+  <pre id="profile"></pre>
+
+  <script>
+    async function main() {
+      const liffId = "YOUR_LIFF_ID";  // 這裡改成你朋友給的 LIFF ID
+      try {
+        await liff.init({ liffId });
+        document.getElementById("status").textContent = "LIFF 初始化成功";
+        document.getElementById("btnGetProfile").disabled = false;
+      } catch (error) {
+        document.getElementById("status").textContent = "LIFF 初始化失敗：" + error.message;
+      }
+    }
+
+    async function getProfile() {
+      try {
+        const profile = await liff.getProfile();
+        document.getElementById("profile").textContent = JSON.stringify(profile, null, 2);
+      } catch (error) {
+        document.getElementById("profile").textContent = "取得失敗：" + error.message;
+      }
+    }
+
+    document.getElementById("btnGetProfile").addEventListener("click", getProfile);
+
+    main();
+  </script>
+</body>
+</html>
